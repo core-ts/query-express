@@ -1,5 +1,5 @@
-import {Request, Response} from 'express';
-import {Attribute, JStatement, Manager, Statement, StringMap} from './metadata';
+import { Request, Response } from 'express';
+import { Attribute, JStatement, Manager, Statement, StringMap } from './metadata';
 
 export function createProxyController(manager: Manager) {
   const c = new ProxyController(manager.query, manager.exec, manager.execBatch);
@@ -44,7 +44,7 @@ export class ProxyController {
       const s: Statement[] = [];
       for (const x of j) {
         const p = parseDate(x.params, x.dates);
-        const y: Statement = {query: x.query, params: p};
+        const y: Statement = { query: x.query, params: p };
         s.push(y);
       }
       const field = req.query['master'];
@@ -67,7 +67,7 @@ export function handleError(err: any, res: Response, log?: (msg: any, ctx?: any)
     res.status(500).json(x).end();
   }
 }
-export function parseDate(args: any[], dates?: number[]): any[] {
+export function parseDate(args?: any[], dates?: number[]): any[] | undefined {
   if (!args || !dates || args.length === 0 || dates.length === 0) {
     return args;
   }
